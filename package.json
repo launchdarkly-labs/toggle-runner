@@ -1,0 +1,35 @@
+{
+  "name": "toggle-runner",
+  "version": "1.0.0",
+  "description": "Toggle Runner game forked from Chromium's T-Rex Runner",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/launchdarkly-labs/toggle-runner.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/launchdarkly-labs/toggle-runner/issues"
+  },
+  "homepage": "https://github.com/launchdarkly-labs/toggle-runner#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6",
+    "prettier": "^2.1.2"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": false,
+    "singleQuote": true
+  }
+}
