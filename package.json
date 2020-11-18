@@ -20,7 +20,8 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "launchdarkly-node-server-sdk": "^5.13.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.6",

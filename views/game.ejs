@@ -13,11 +13,23 @@
   </head>
 
   <body>
+    <% if (isSpaceModeEnabled) { %>
+    <header>
+      <h1>Toggle Runner</h1>
+    </header>
+    <% } %>
+
     <div class="interstitial-wrapper"></div>
 
     <div id="resources">
-      <img id="resources-1x" src="images/100-percent/100-sprite.png" />
-      <img id="resources-2x" src="images/200-percent/200-sprite.png" />
+      <img
+        id="resources-1x"
+        src="images/100-percent/100-sprite<%= isSpaceModeEnabled ? '-space' : '' %>.png"
+      />
+      <img
+        id="resources-2x"
+        src="images/200-percent/200-sprite<%= isSpaceModeEnabled ? '-space' : '' %>.png"
+      />
       <div id="audio-resources">
         <audio id="sound-press" src="sounds/button-press.mp3"></audio>
         <audio id="sound-hit" src="sounds/hit.mp3"></audio>
