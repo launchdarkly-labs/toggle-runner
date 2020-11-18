@@ -28,8 +28,31 @@ const CONFIG = {
   SPEED_DROP_COEFFICIENT: 3,
 }
 
+// Implements space-like features in game
+function setSpaceMode(isSpaceModeOn) {
+  console.log('Space mode:', isSpaceModeOn)
+  if (isSpaceModeOn) {
+    game.updateConfigSetting('GRAVITY', 0.3)
+    game.updateConfigSetting('INVERT_DISTANCE', 0)
+    game.updateConfigSetting('INVERT_FADE_DURATION', 1000)
+    game.updateConfigSetting('MAX_CLOUDS', 1)
+    game.updateConfigSetting('MAX_OBSTACLE_LENGTH', 6)
+    game.updateConfigSetting('GAP_COEFFICIENT', 5)
+  } else {
+    game.updateConfigSetting('GRAVITY', CONFIG.GRAVITY)
+    game.updateConfigSetting('INVERT_DISTANCE', CONFIG.INVERT_DISTANCE)
+    game.updateConfigSetting(
+      'INVERT_FADE_DURATION',
+      CONFIG.INVERT_FADE_DURATION
+    )
+    game.updateConfigSetting('MAX_CLOUDS', CONFIG.MAX_CLOUDS)
+    game.updateConfigSetting('MAX_OBSTACLE_LENGTH', CONFIG.MAX_OBSTACLE_LENGTH)
+    game.updateConfigSetting('GAP_COEFFICIENT', CONFIG.GAP_COEFFICIENT)
+  }
+}
+
 // Run game
-new Runner('.interstitial-wrapper', CONFIG)
+const game = new Runner('.interstitial-wrapper', CONFIG)
 
 // Dark mode feature
 const darkMode = new DarkMode()
@@ -39,9 +62,14 @@ ldclient.on('ready', function () {
   // This callback receives no arguments...
   // So we need to call `variation` to fetch the flag value
   darkMode.setFeatureEnabled(ldclient.variation('dark-mode', false))
+
+  // This has to be delayed until the game is ready... which is in the next tick
+  setTimeout(() => setSpaceMode(ldclient.variation('space-mode', false)), 0)
 })
 
 // Respond to flag changes in real-time
 ldclient.on('change:dark-mode', function (isFeatureEnabled) {
   darkMode.setFeatureEnabled(isFeatureEnabled)
 })
+
+ldclient.on('change:space-mode', setSpaceMode)
