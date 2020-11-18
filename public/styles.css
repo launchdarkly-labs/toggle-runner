@@ -22,3 +22,24 @@ header {
 #resources {
   display: none;
 }
+
+#controls {
+  margin-top: 2em;
+  text-align: right;
+  width: 600px;
+}
+
+#dark-mode {
+  font-family: 'Press Start 2P', cursive;
+  font-size: .6em;
+  color: #555;
+  padding: 5px 7px;
+  border-radius: 3px;
+  border-width: 1px;
+  cursor: pointer;
+}
+
+.dark-mode {
+  background-color: #000;
+  filter: invert(1);
+}

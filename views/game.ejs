@@ -10,6 +10,15 @@
       rel="stylesheet"
     />
     <script src="toggle-runner.js"></script>
+    <script
+      crossorigin="anonymous"
+      src="https://unpkg.com/launchdarkly-js-client-sdk/dist/ldclient.min.js"
+    ></script>
+    <script src="dark-mode.js"></script>
+    <script>
+      window.LD_CLIENT_SIDE_ID = '<%= clientSideID %>';
+      window.LD_FLAGS = <%- flags %>;
+    </script>
   </head>
 
   <body>

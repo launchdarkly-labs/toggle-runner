@@ -15,8 +15,13 @@ app.use(express.static('public'))
 
 app.get('/', async (req, res) => {
   try {
-    const isSpaceModeEnabled = await ldclient.variation('space-mode', LD_USER, false)
-    res.render('game', { isSpaceModeEnabled })
+    const flagsState = await ldclient.allFlagsState(LD_USER)
+    const allFlags = flagsState.allValues()
+    res.render('game', {
+      clientSideID: process.env.LD_CLIENT_SIDE_ID,
+      flags: JSON.stringify(flagsState.toJSON()),
+      isSpaceModeEnabled: allFlags['space-mode']
+    })
   } catch (err) {
     console.error(err)
     res.status(500).send('Error occurred while retrieving flags')

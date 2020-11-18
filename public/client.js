@@ -1,3 +1,9 @@
+const ldclient = LDClient.initialize(
+  window.LD_CLIENT_SIDE_ID,
+  { anonymous: true, custom: { userAgent: navigator.userAgent } },
+  { bootstrap: window.LD_FLAGS }
+)
+
 const CONFIG = {
   ACCELERATION: 0.001,
   BG_CLOUD_SPEED: 0.2,
@@ -19,8 +25,23 @@ const CONFIG = {
   MOBILE_SPEED_COEFFICIENT: 1.2,
   RESOURCE_TEMPLATE_ID: 'audio-resources',
   SPEED: 6,
-  SPEED_DROP_COEFFICIENT: 3
-};
+  SPEED_DROP_COEFFICIENT: 3,
+}
 
 // Run game
 new Runner('.interstitial-wrapper', CONFIG)
+
+// Dark mode feature
+const darkMode = new DarkMode()
+
+// When LD client is ready, evaluate flags
+ldclient.on('ready', function () {
+  // This callback receives no arguments...
+  // So we need to call `variation` to fetch the flag value
+  darkMode.setFeatureEnabled(ldclient.variation('dark-mode', false))
+})
+
+// Respond to flag changes in real-time
+ldclient.on('change:dark-mode', function (isFeatureEnabled) {
+  darkMode.setFeatureEnabled(isFeatureEnabled)
+})
